@@ -8,6 +8,7 @@ import io.swagger.annotations.*;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.Type;
@@ -19,16 +20,12 @@ import java.util.List;
 @Api(value = "Operations with notes")
 public class NoteController {
 
-    private static final Type LIST_OF_NOTES_TYPE = new TypeToken<List<NoteGetDto>>() {
-    }.getType();
+    private static final Type LIST_OF_NOTES_TYPE = new TypeToken<List<NoteGetDto>>() {}.getType();
     private final NoteService noteService;
     private final ModelMapper modelMapper;
 
 
     @ApiOperation("Get all notes")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "All notes was received")
-    })
     @GetMapping
     public List<NoteGetDto> getAllNotes() {
         return modelMapper.map(noteService.getAll(), LIST_OF_NOTES_TYPE);
@@ -36,31 +33,22 @@ public class NoteController {
 
 
     @ApiOperation("Create new note")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Note was created")
-    })
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public NoteGetDto create(NotePostDto note) {
         return modelMapper.map(noteService.createNewNote(modelMapper.map(note, Note.class)), NoteGetDto.class);
     }
 
 
     @ApiOperation("Delete by title")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Note was deleted"),
-            @ApiResponse(code = 204, message = "Note not found")
-    })
     @DeleteMapping("/{title}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable String title) {
         noteService.deleteNote(title);
     }
 
 
     @ApiOperation("Find by title")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Note was received"),
-            @ApiResponse(code = 204, message = "Note not found")
-    })
     @GetMapping("/{title}")
     public List<NoteGetDto> findByTitle(@PathVariable String title) {
         return modelMapper.map(noteService.findAllByTitle(title), LIST_OF_NOTES_TYPE);
