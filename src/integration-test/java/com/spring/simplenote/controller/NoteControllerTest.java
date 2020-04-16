@@ -76,7 +76,7 @@ public class NoteControllerTest {
     }
 
     @Test
-    public void create() throws Exception {
+    public void create_whenTitleAndTestNotNullAndTitleUnique_CreateNewNote() throws Exception {
         String noteCreateJson = mapper.writeValueAsString(NotePostDto.builder()
                 .title("Test from test")
                 .text("It is test")
@@ -85,7 +85,43 @@ public class NoteControllerTest {
         mvc.perform(MockMvcRequestBuilders.post("/notes")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(noteCreateJson))
-                .andExpect(status().isCreated());
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.title").value("Test from test"))
+                .andExpect(jsonPath("$.text").value("It is test"));
+    }
+
+    @Test
+    public void create_whenTitleIsNull_getException() throws Exception {
+        String noteCreateJson = mapper.writeValueAsString(NotePostDto.builder()
+                .text("It is test")
+                .build());
+
+        mvc.perform(MockMvcRequestBuilders.post("/notes")
+                .content(noteCreateJson))
+                .andExpect(status().isUnsupportedMediaType());
+    }
+
+    @Test
+    public void create_whenTextIsNull_getException() throws Exception {
+        String noteCreateJson = mapper.writeValueAsString(NotePostDto.builder()
+                .title("Unique")
+                .build());
+
+        mvc.perform(MockMvcRequestBuilders.post("/notes")
+                .content(noteCreateJson))
+                .andExpect(status().isUnsupportedMediaType());
+    }
+
+    @Test
+    public void create_whenTitleNotUnique_getException() throws Exception {
+        String noteCreateJson = mapper.writeValueAsString(NotePostDto.builder()
+                .title("first title")
+                .text("test")
+                .build());
+
+        mvc.perform(MockMvcRequestBuilders.post("/notes")
+                .content(noteCreateJson))
+                .andExpect(status().isUnsupportedMediaType());
     }
 
     @Test

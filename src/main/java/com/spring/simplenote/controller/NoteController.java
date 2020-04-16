@@ -35,7 +35,7 @@ public class NoteController {
     @ApiOperation("Create new note")
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public NoteGetDto create(NotePostDto note) {
+    public NoteGetDto create(@RequestBody NotePostDto note) {
         return modelMapper.map(noteService.createNewNote(modelMapper.map(note, Note.class)), NoteGetDto.class);
     }
 

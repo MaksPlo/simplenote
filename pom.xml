@@ -96,6 +96,11 @@
 			<version>2.0.2-beta</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>5.3.4.Final</version>
+		</dependency>
 	</dependencies>
 
 	<build>
