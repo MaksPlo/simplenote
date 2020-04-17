@@ -20,7 +20,8 @@ import java.util.List;
 @Api(value = "Operations with notes")
 public class NoteController {
 
-    private static final Type LIST_OF_NOTES_TYPE = new TypeToken<List<NoteGetDto>>() {}.getType();
+    private static final Type LIST_OF_NOTES_TYPE = new TypeToken<List<NoteGetDto>>() {
+    }.getType();
     private final NoteService noteService;
     private final ModelMapper modelMapper;
 
@@ -41,10 +42,10 @@ public class NoteController {
 
 
     @ApiOperation("Delete by title")
-    @DeleteMapping("/{title}")
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable String title) {
-        noteService.deleteNote(title);
+    public void delete(@PathVariable String id) {
+        noteService.deleteNote(id);
     }
 
 
@@ -52,5 +53,11 @@ public class NoteController {
     @GetMapping("/{title}")
     public List<NoteGetDto> findByTitle(@PathVariable String title) {
         return modelMapper.map(noteService.findAllByTitle(title), LIST_OF_NOTES_TYPE);
+    }
+
+    @ApiOperation("Find by title")
+    @PutMapping("/{id}")
+    public NoteGetDto updateNote(@PathVariable String id, String text) {
+        return modelMapper.map(noteService.updateNote(id, text), NoteGetDto.class);
     }
 }

@@ -19,10 +19,10 @@ public class Note {
     private String id;
 
     @Indexed(unique = true)
-    @NotNull(message = "can't be null")
+    @NotNull(message = "title can't be null")
     private String title;
 
-    @NotNull(message = "can't be null")
+    @NotNull(message = "text can't be null")
     private String text;
 
 }

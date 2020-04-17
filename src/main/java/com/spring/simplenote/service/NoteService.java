@@ -1,5 +1,6 @@
 package com.spring.simplenote.service;
 
+import com.spring.simplenote.exception.NotFoundException;
 import com.spring.simplenote.model.Note;
 import com.spring.simplenote.repository.NoteRepository;
 import lombok.RequiredArgsConstructor;
@@ -25,8 +26,14 @@ public class NoteService {
         return noteRepository.findByTitleContaining(title);
     }
 
-    public void deleteNote(String title) {
-        noteRepository.deleteByTitle(title);
+    public void deleteNote(String id) {
+        noteRepository.deleteById(id);
     }
 
+    public Note updateNote(String noteId, String text) {
+        Note note = noteRepository.findById(noteId).orElseThrow(NotFoundException::new);
+        note.setText(text);
+        noteRepository.save(note);
+        return note;
+    }
 }
