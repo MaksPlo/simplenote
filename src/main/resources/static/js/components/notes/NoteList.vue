@@ -1,5 +1,5 @@
 <template>
-    <div style="position: relative; width: 600px;">
+    <v-layout align-space-around justify-start column>
                 <note-form :notes="notes" :noteAttr="note"/>
         <note-row v-for="note in notes"
                   :key="note.id"
@@ -7,7 +7,7 @@
                   :editNote="editNote"
                   :deleteNote="deleteNote"
                   :notes="notes"/>
-    </div>
+    </v-layout>
 </template>
 
 <script>

@@ -1,9 +1,19 @@
 <template>
-    <div>
-        <input type="text" placeholder="Write title" v-model="title"/>
-        <input type="text" placeholder="Write text" v-model="text"/>
-        <input type="button" value="Save" @click="save"/>
-    </div>
+    <v-layout row>
+        <v-text-field
+                label="New title"
+                placeholder="Write title"
+                v-model="title"
+        />
+        <v-text-field
+                label="New text"
+                placeholder="Write text"
+                v-model="text"
+        />
+        <v-btn @click="save">
+            Save
+        </v-btn>
+    </v-layout>
 </template>
 
 <script>
