@@ -12,9 +12,11 @@
 
 <script>
     import NotesList from '../components/notes/NoteList.vue'
+    import {addHandler} from "../util/ws"
+    import {getIndex} from "../util/collections"
 
     export default {
-        components:{
+        components: {
             NotesList
         },
         data() {
@@ -22,10 +24,20 @@
                 notes: frontendData.notes,
                 profile: frontendData.profile
             }
+        },
+        created() {
+            addHandler(data => {
+                let index = getIndex(this.notes, data.id)
+                if (index > -1) {
+                    this.notes.splice(index, 1, data)
+                } else {
+                    this.notes.push(data)
+                }
+            })
         }
     }
 </script>
 
-<style scoped>
+<style>
 
 </style>

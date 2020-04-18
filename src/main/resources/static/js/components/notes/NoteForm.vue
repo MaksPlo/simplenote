@@ -7,14 +7,7 @@
 </template>
 
 <script>
-    function getIndex(list, id) {
-        for (var i = 0; i < list.length; i++) {
-            if (list[i].id === id) {
-                return i;
-            }
-        }
-        return -1
-    }
+    import {sendNote} from "../../util/ws"
 
     export default {
         props: ['notes', 'noteAttr'],
@@ -33,27 +26,10 @@
         },
         methods: {
             save() {
-                const note = {text: this.text, title: this.title};
-
-                if (this.id) {
-                    this.$resource('/notes{/id}').update({
-                        id: this.id,
-                        text: this.text,
-                        title: this.title
-                    }, note).then(result => result.json().then(data => {
-                        const index = getIndex(this.notes, data.id);
-                        this.notes.splice(index, 1, data)
-                        this.text = ''
-                        this.id = ''
-                    }))
-                } else {
-                    this.$resource('/notes{/id}').save(note).then(result => result.json().then(data => {
-                            this.notes.push(data)
-                            this.text = ''
-                            this.title = ''
-                        })
-                    )
-                }
+                sendNote({id: this.id, text: this.text, title: this.title})
+                this.text = ''
+                this.title = ''
+                this.id = ''
             }
         }
     }
@@ -62,3 +38,5 @@
 <style>
 
 </style>
+
+

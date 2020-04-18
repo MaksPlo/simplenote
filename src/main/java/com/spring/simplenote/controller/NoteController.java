@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.http.HttpStatus;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.Type;
@@ -36,7 +38,7 @@ public class NoteController {
     @ApiOperation("Create new note")
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public NoteGetDto create(@RequestBody NotePostDto note) {
+    public NoteGetDto create(@RequestBody NoteGetDto note) {
         return modelMapper.map(noteService.createNewNote(modelMapper.map(note, Note.class)), NoteGetDto.class);
     }
 
@@ -57,7 +59,20 @@ public class NoteController {
 
     @ApiOperation("Find by title")
     @PutMapping("/{id}")
-    public NoteGetDto updateNote(@PathVariable String id, String text) {
-        return modelMapper.map(noteService.updateNote(id, text), NoteGetDto.class);
+    public NoteGetDto updateNote(@RequestBody NoteGetDto noteGetDto) {
+        Note note = modelMapper.map(noteGetDto, Note.class);
+        return modelMapper.map(noteService.updateNote(note.getId(), note.getText()), NoteGetDto.class);
+    }
+
+    @MessageMapping("/changeNote")
+    @SendTo("topic/activity")
+    public NoteGetDto change(NoteGetDto noteGetDto){
+        if (noteService.findAllByTitle(noteGetDto.getTitle()).isEmpty()){
+            return modelMapper.map(noteService.createNewNote(modelMapper.map(noteGetDto, Note.class)), NoteGetDto.class);
+        }else{
+            Note note = modelMapper.map(noteGetDto, Note.class);
+            return modelMapper.map(noteService.updateNote(note.getId(), note.getText()), NoteGetDto.class);
+        }
+
     }
 }
