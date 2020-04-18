@@ -6,19 +6,19 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
 @Builder
 @AllArgsConstructor
-public class NotePostDto {
+public class NoteUpdateDto {
 
-    @NotNull
+    @JsonProperty("id")
+    private String id;
+
     @JsonProperty("title")
     private String title;
 
-    @NotNull
     @JsonProperty("text")
     private String text;
 }
