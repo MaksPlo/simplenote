@@ -71,37 +71,9 @@ public class NoteServiceTest {
     }
 
     @Test
-    public void findAllByTitle() {
-        List<Note> notes = new ArrayList<>();
-        Note first = Note.builder()
-                .id("1")
-                .title("Test first")
-                .text("test first")
-                .build();
-        notes.add(first);
-        Note second = Note.builder()
-                .id("2")
-                .title("Test second")
-                .text("test second")
-                .build();
-        notes.add(second);
-        when(noteRepository.findByTitleContaining("Test")).thenReturn(notes);
-
-        List<Note> returnedNotes = noteService.findAllByTitle("Test");
-
-        verify(noteRepository, atLeastOnce()).findByTitleContaining(any());
-        assertEquals("1", returnedNotes.get(0).getId());
-        assertEquals("Test first", returnedNotes.get(0).getTitle());
-        assertEquals("test first", returnedNotes.get(0).getText());
-        assertEquals("2", returnedNotes.get(1).getId());
-        assertEquals("Test second", returnedNotes.get(1).getTitle());
-        assertEquals("test second", returnedNotes.get(1).getText());
-    }
-
-    @Test
     public void deleteNote() {
-        noteService.deleteNote("test");
+        noteService.deleteNote("1");
 
-        verify(noteRepository, atLeastOnce()).deleteByTitle(any());
+        verify(noteRepository, atLeastOnce()).deleteById(any());
     }
 }

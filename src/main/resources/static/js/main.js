@@ -16,7 +16,6 @@ Vue.filter('formatDate', function (value) {
 })
 
 
-
 new Vue({
     el: '#app',
     render: a => a(App)
