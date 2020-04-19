@@ -11,15 +11,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import java.util.Date;
+
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
+@ActiveProfiles("test")
 public class NoteControllerTest {
 
     @Autowired
@@ -37,45 +43,34 @@ public class NoteControllerTest {
                 .text("First note")
                 .title("first title")
                 .id("1")
+                .time(new Date(System.currentTimeMillis()))
                 .build();
         noteRepository.save(first);
         Note second = Note.builder()
                 .text("Second note")
                 .title("second title")
                 .id("2")
+                .time(new Date(System.currentTimeMillis()))
                 .build();
         noteRepository.save(second);
         Note third = Note.builder()
                 .text("third test")
                 .title("third test")
                 .id("3")
+                .time(new Date(System.currentTimeMillis()))
                 .build();
         noteRepository.save(third);
         Note fourth = Note.builder()
                 .text("fourth test")
                 .title("fourth test")
                 .id("4")
+                .time(new Date(System.currentTimeMillis()))
                 .build();
         noteRepository.save(fourth);
     }
 
     @Test
-    public void getAllNotes() throws Exception {
-        mvc.perform(MockMvcRequestBuilders.get("/notes"))
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].id").value("1"))
-                .andExpect(jsonPath("$[0].title").value("first title"))
-                .andExpect(jsonPath("$[0].text").value("First note"))
-                .andExpect(jsonPath("$[1].id").value("2"))
-                .andExpect(jsonPath("$[1].title").value("second title"))
-                .andExpect(jsonPath("$[1].text").value("Second note"))
-                .andExpect(jsonPath("$[2].id").value("3"))
-                .andExpect(jsonPath("$[2].title").value("third test"))
-                .andExpect(jsonPath("$[2].text").value("third test"));
-    }
-
-    @Test
+    @WithMockUser
     public void create_whenTitleAndTestNotNullAndTitleUnique_CreateNewNote() throws Exception {
         String noteCreateJson = mapper.writeValueAsString(NotePostDto.builder()
                 .title("Test from test")
@@ -91,6 +86,7 @@ public class NoteControllerTest {
     }
 
     @Test
+    @WithMockUser
     public void create_whenTitleIsNull_getException() throws Exception {
         String noteCreateJson = mapper.writeValueAsString(NotePostDto.builder()
                 .text("It is test")
@@ -102,6 +98,7 @@ public class NoteControllerTest {
     }
 
     @Test
+    @WithMockUser
     public void create_whenTextIsNull_getException() throws Exception {
         String noteCreateJson = mapper.writeValueAsString(NotePostDto.builder()
                 .title("Unique")
@@ -113,6 +110,7 @@ public class NoteControllerTest {
     }
 
     @Test
+    @WithMockUser
     public void create_whenTitleNotUnique_getException() throws Exception {
         String noteCreateJson = mapper.writeValueAsString(NotePostDto.builder()
                 .title("first title")
@@ -125,22 +123,10 @@ public class NoteControllerTest {
     }
 
     @Test
+    @WithMockUser
     public void delete() throws Exception {
         mvc.perform(MockMvcRequestBuilders.delete("/notes/fourth")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
-    }
-
-    @Test
-    public void findByTitle() throws Exception {
-        mvc.perform(MockMvcRequestBuilders.get("/notes/title"))
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].id").value("1"))
-                .andExpect(jsonPath("$[0].title").value("first title"))
-                .andExpect(jsonPath("$[0].text").value("First note"))
-                .andExpect(jsonPath("$[1].id").value("2"))
-                .andExpect(jsonPath("$[1].title").value("second title"))
-                .andExpect(jsonPath("$[1].text").value("Second note"));
     }
 }

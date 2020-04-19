@@ -14,16 +14,13 @@ public class NoteService {
 
     private final NoteRepository noteRepository;
 
+
     public Note createNewNote(Note note) {
         return noteRepository.save(note);
     }
 
     public List<Note> getAll() {
         return noteRepository.findAll();
-    }
-
-    public List<Note> findAllByTitle(String title) {
-        return noteRepository.findByTitleContaining(title);
     }
 
     public void deleteNote(String id) {
