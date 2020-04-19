@@ -6,6 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 
 @Document(collection = "notes")
 @Builder(toBuilder = true)
@@ -24,5 +25,8 @@ public class Note {
 
     @NotNull(message = "text can't be null")
     private String text;
+
+    @NotNull(message = "time can't be null")
+    private Date time;
 
 }

@@ -25,7 +25,7 @@
 
     export default {
         components: {
-            NotesList
+            NotesList,
         },
         data() {
             return {
