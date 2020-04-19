@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.http.HttpStatus;
+import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.Type;
@@ -51,7 +52,7 @@ public class NoteController {
 
     @ApiOperation("Find by title")
     @GetMapping("/{title}")
-    public List<NoteGetDto> findByTitle(@PathVariable String title) {
+    public List<NoteGetDto> findByTitle(@PathVariable @Nullable String title) {
         return modelMapper.map(noteService.findAllByTitle(title), LIST_OF_NOTES_TYPE);
     }
 

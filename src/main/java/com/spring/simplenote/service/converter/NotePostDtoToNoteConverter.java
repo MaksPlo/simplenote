@@ -5,6 +5,8 @@ import com.spring.simplenote.model.Note;
 import org.modelmapper.AbstractConverter;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
+
 @Component
 public class NotePostDtoToNoteConverter extends AbstractConverter<NotePostDto, Note> {
     @Override
@@ -12,6 +14,7 @@ public class NotePostDtoToNoteConverter extends AbstractConverter<NotePostDto, N
         return Note.builder()
                 .text(notePostDto.getText())
                 .title(notePostDto.getTitle())
+                .time(new Date(System.currentTimeMillis()))
                 .build();
     }
 }

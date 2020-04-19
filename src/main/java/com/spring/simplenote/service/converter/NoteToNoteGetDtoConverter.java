@@ -14,6 +14,7 @@ public class NoteToNoteGetDtoConverter extends AbstractConverter<Note, NoteGetDt
                 .id(note.getId())
                 .title(note.getTitle())
                 .text(note.getText())
+                .time(note.getTime())
                 .build();
     }
 }

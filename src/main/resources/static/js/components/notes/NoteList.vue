@@ -1,13 +1,16 @@
 <template>
-    <div style="position: relative; width: 600px;">
-                <note-form :notes="notes" :noteAttr="note"/>
-        <note-row v-for="note in notes"
+    <v-layout align-space-around justify-start column>
+        <note-form :notes="notes" :noteAttr="note"/>
+        <v-layout row>
+            <v-text-field label="Find note" placeholder="Write note title" v-model="title"/>
+        </v-layout>
+        <note-row v-for="note in filteredNotes"
                   :key="note.id"
                   :note="note"
                   :editNote="editNote"
                   :deleteNote="deleteNote"
                   :notes="notes"/>
-    </div>
+    </v-layout>
 </template>
 
 <script>
@@ -22,8 +25,17 @@
         },
         data() {
             return {
+                title: '',
                 note: null
             }
+        },
+        computed: {
+            filteredNotes() {
+                return this.notes.filter(note => {
+                    return note.title.toLowerCase().indexOf(this.title.toLowerCase()) !== -1
+                })
+            }
+
         },
         methods: {
             editNote(note) {
@@ -32,7 +44,7 @@
             deleteNote(note) {
                 this.$resource('/notes{/id}').remove({id: note.id}).then(result => {
                     if (result.status === 204) {
-                        this.notes.splice(this.notes.indexOf(this.note), 1)
+                        this.notes.splice(this.notes.indexOf(note), 1)
                     }
                 })
             }
