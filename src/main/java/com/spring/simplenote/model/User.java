@@ -17,10 +17,14 @@ import java.io.Serializable;
 public class User implements Serializable {
     @Id
     private String id;
-    private String name;
-    private String userpic;
-    private String email;
-    private String gender;
-    private String locale;
 
+    private String name;
+
+    private String userpic;
+
+    private String email;
+
+    private String gender;
+
+    private String locale;
 }
