@@ -1,9 +1,13 @@
 package com.spring.simplenote.repository;
 
 import com.spring.simplenote.model.Note;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface NoteRepository extends MongoRepository<Note, String> {
+import java.util.List;
+
+public interface NoteRepository extends JpaRepository<Note, Long> {
     void deleteByTitle(String title);
+
+    List<Note> findAllByUserId(String userId);
 }
 

@@ -19,15 +19,15 @@ public class NoteService {
         return noteRepository.save(note);
     }
 
-    public List<Note> getAll() {
-        return noteRepository.findAll();
+    public List<Note> getByUserId(String userId) {
+        return noteRepository.findAllByUserId(userId);
     }
 
-    public void deleteNote(String id) {
+    public void deleteNote(Long id) {
         noteRepository.deleteById(id);
     }
 
-    public Note updateNote(String noteId, String text) {
+    public Note updateNote(Long noteId, String text) {
         Note note = noteRepository.findById(noteId).orElseThrow(NotFoundException::new);
         note.setText(text);
         noteRepository.save(note);

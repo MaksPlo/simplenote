@@ -16,10 +16,10 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.Date;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
@@ -42,28 +42,28 @@ public class NoteControllerTest {
         Note first = Note.builder()
                 .text("First note")
                 .title("first title")
-                .id("1")
+                .id(1L)
                 .time(new Date(System.currentTimeMillis()))
                 .build();
         noteRepository.save(first);
         Note second = Note.builder()
                 .text("Second note")
                 .title("second title")
-                .id("2")
+                .id(2L)
                 .time(new Date(System.currentTimeMillis()))
                 .build();
         noteRepository.save(second);
         Note third = Note.builder()
                 .text("third test")
                 .title("third test")
-                .id("3")
+                .id(3L)
                 .time(new Date(System.currentTimeMillis()))
                 .build();
         noteRepository.save(third);
         Note fourth = Note.builder()
                 .text("fourth test")
                 .title("fourth test")
-                .id("4")
+                .id(4L)
                 .time(new Date(System.currentTimeMillis()))
                 .build();
         noteRepository.save(fourth);
@@ -81,8 +81,8 @@ public class NoteControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(noteCreateJson))
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.title").value("Test from test"))
-                .andExpect(jsonPath("$.text").value("It is test"));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.title").value("Test from test"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.text").value("It is test"));
     }
 
     @Test

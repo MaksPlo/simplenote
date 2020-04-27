@@ -1,12 +1,14 @@
 package com.spring.simplenote.model;
 
 import lombok.*;
-import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serializable;
 
-@Document(collection = "users")
+@Entity
+@Table(name = "users")
 @Builder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,4 +22,5 @@ public class User implements Serializable {
     private String email;
     private String gender;
     private String locale;
+
 }

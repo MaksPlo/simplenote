@@ -15,7 +15,7 @@ import java.util.Date;
 public class NoteGetDto {
 
     @JsonProperty("id")
-    private String id;
+    private Long id;
 
     @JsonProperty("title")
     private String title;

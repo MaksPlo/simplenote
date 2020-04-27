@@ -31,14 +31,14 @@ public class NoteController {
     @ApiOperation("Delete by id")
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable String id) {
+    public void delete(@PathVariable Long id) {
         noteService.deleteNote(id);
     }
 
 
     @ApiOperation("Update note by id")
     @PutMapping("/{id}")
-    public NoteGetDto updateNote(@PathVariable String id, String text) {
+    public NoteGetDto updateNote(@PathVariable Long id, String text) {
         return modelMapper.map(noteService.updateNote(id, text), NoteGetDto.class);
     }
 }

@@ -20,7 +20,6 @@ public class MainController {
     @GetMapping
     public String main(Model model, @AuthenticationPrincipal User user) {
         model.addAttribute("frontendData", userService.getUserNotes(user));
-        model.addAttribute("isDevMode", userService.isDevMode());
         return "index";
     }
 }
