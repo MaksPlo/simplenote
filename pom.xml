@@ -115,6 +115,16 @@
 			<artifactId>spring-boot-starter-data-mongodb</artifactId>
 			<version>${mongo-starter.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.testcontainers</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>1.10.6</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>

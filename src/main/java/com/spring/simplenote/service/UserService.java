@@ -30,7 +30,7 @@ public class UserService {
 
     public User getCurrentUser() {
         User userDetails = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return userRepository.findById(userDetails.getId()).orElseThrow(NotFoundException::new);
+        return userRepository.findByEmail(userDetails.getEmail()).orElseThrow(NotFoundException::new);
     }
 
 }
