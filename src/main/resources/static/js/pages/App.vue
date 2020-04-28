@@ -10,7 +10,7 @@
         </v-toolbar>
         <v-content>
             <v-container v-if="!profile">
-                Необходимо авторизоваться через
+                Login using
                 <a href="/login">Google</a>
             </v-container>
             <v-container v-if="profile">
