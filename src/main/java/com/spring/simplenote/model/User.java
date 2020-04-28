@@ -4,8 +4,10 @@ import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -27,4 +29,7 @@ public class User implements Serializable {
     private String gender;
 
     private String locale;
+
+    @OneToMany
+    private List<Note> notes;
 }

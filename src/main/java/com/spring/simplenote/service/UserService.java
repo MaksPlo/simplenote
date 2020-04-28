@@ -7,8 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -17,12 +17,12 @@ public class UserService {
     private final UserRepository userRepository;
 
 
-    public Map<String, Object> getUserNotes(User user) {
-        Map<String, Object> data = new HashMap<>();
+    public List<User> getUserNotes(User user) {
+        List<User> data = new ArrayList<>();
 
         if (user != null) {
-            data.put("profile", user);
-            data.put("notes", noteService.getByUserId(user.getId()));
+            user.setNotes(noteService.getByUserId(user.getId()));
+            data.add(user);
         }
         return data;
     }

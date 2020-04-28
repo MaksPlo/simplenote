@@ -19,7 +19,7 @@ public class MainController {
 
     @GetMapping
     public String main(Model model, @AuthenticationPrincipal User user) {
-        model.addAttribute("frontendData", userService.getUserNotes(user));
+        model.addAttribute("userNotes", userService.getUserNotes(user));
         return "index";
     }
 }

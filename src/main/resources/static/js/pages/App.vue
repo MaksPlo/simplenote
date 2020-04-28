@@ -29,8 +29,8 @@
         },
         data() {
             return {
-                notes: frontendData.notes,
-                profile: frontendData.profile
+                notes: userNotes[0].notes,
+                profile: userNotes[0]
             }
         }
     }

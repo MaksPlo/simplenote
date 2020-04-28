@@ -26,3 +26,15 @@ create table notes
 );
 
 
+create table users_notes
+(
+    user_id  varchar(255) not null
+        constraint fk_user_id
+            references users,
+    notes_id bigint       not null
+        constraint uk_notes_id
+            unique
+        constraint fk_user_notes
+            references notes
+);
+

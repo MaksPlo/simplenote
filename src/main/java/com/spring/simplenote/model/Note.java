@@ -13,7 +13,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Note implements Serializable {
+public class Note implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
