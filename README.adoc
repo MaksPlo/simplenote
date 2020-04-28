@@ -1,6 +1,6 @@
 # SimpleNote
 
-==Introduction
+==Introduction==
 
 SimpleNote is a demo project wich use technologies and tools on backend:
 
@@ -23,4 +23,10 @@ and on frontend:
 - Vuetify
 - Node.js
 
-==How it work
+==How it work==
+
+Project start from login form. 
+For authentication, gmail OAuth 2.0 is used, the token is provided by Google API.
+
+
+- JS
