@@ -28,4 +28,6 @@ and on frontend:
 Project start from login form. 
 For authentication, gmail OAuth 2.0 is used, the token is provided by Google API.
 
-![Image alt](https://github.com/MaksPlo/simplenote/raw/master/simplenote/src/main/resources/images/login.png)
+
+![Image alt][(https://github.com/MaksPlo/simplenote/raw/master/src/main/resources/images/login.png)]
+
