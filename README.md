@@ -1,6 +1,6 @@
 # SimpleNote
 
-===== Introduction
+### Introduction
 
 SimpleNote is a demo project wich use technologies and tools on backend:
 
@@ -24,7 +24,7 @@ and on frontend:
 - Vuetify (https://vuetifyjs.com/ru/getting-started/quick-start/)
 - Node.js (https://nodejs.org/en/docs/)
 
-==How it work==
+### How it work
 
 Project start from login form. 
 
