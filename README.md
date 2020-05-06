@@ -46,12 +46,11 @@ After the authentication a user sees the main page consisting of a form for addi
 ![second note alt](https://github.com/MaksPlo/simplenote/raw/master/src/main/resources/images/add_second_note.png)
 
 
-A user can create, filter, edit and delete their notes.
+A user can create, edit, filter and delete their notes.
 ![writing note alt](https://github.com/MaksPlo/simplenote/raw/master/src/main/resources/images/note_writing.png)
 ![first note alt](https://github.com/MaksPlo/simplenote/raw/master/src/main/resources/images/add_first_note.png)
 ![edit note alt](https://github.com/MaksPlo/simplenote/raw/master/src/main/resources/images/update_second_note.png)
 ![delete note alt](https://github.com/MaksPlo/simplenote/raw/master/src/main/resources/images/remove_first_note.png)
-![note for filter alt](https://github.com/MaksPlo/simplenote/raw/master/src/main/resources/images/add_note_to_filtering.png)
 ![filtering note alt](https://github.com/MaksPlo/simplenote/raw/master/src/main/resources/images/filtering_example.png)
 
 The user can see only his notes.
