@@ -29,7 +29,7 @@ The frontend uses:
 
 ### How to use the app
 
-Project start from login form. 
+The project starts from login form. 
 
 ![login alt](https://github.com/MaksPlo/simplenote/raw/master/src/main/resources/images/login.png)
 
