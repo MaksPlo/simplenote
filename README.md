@@ -1,6 +1,6 @@
 # SimpleNote
 
-=====Introduction
+===== Introduction
 
 SimpleNote is a demo project wich use technologies and tools on backend:
 
