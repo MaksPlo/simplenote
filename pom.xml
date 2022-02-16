@@ -23,7 +23,7 @@
 		<spring-security.version>5.3.1.RELEASE</spring-security.version>
 		<spring-cloud.version>2.2.1.RELEASE</spring-cloud.version>
 		<spring-security-test.version>5.3.1.RELEASE</spring-security-test.version>
-		<postgresql.version>42.2.12</postgresql.version>
+		<postgresql.version>42.3.3</postgresql.version>
 		<spring-session.version>2.2.2.RELEASE</spring-session.version>
 		<mongo-starter.version>2.2.2.RELEASE</mongo-starter.version>
 	</properties>
